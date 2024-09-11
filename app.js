@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 import "dotenv/config";
 
 const app = express();
-
+const DB_CONNECTION_STRING = "mongodb+srv://Kyliechisholm:Moonpower1!@mernshop.auwxm.mongodb.net/?retryWrites=true&w=majority&appName=mernShop";
 app.use(
   cors({
     origin: process.env.UI_URL,
@@ -22,9 +22,9 @@ app.use("/products", productsRouter);
 
 app.use("/users", usersRouter);
 
-mongoose
-  .connect(process.env.DB_CONNECTION_STRING)
+mongoose.connect(DB_CONNECTION_STRING)
   .then(() => {
+
     console.log("Successfully connected to the db.");
     const port = process.env.PORT ?? 3000;
     app.listen(port, () => {
